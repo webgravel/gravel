@@ -10,11 +10,26 @@ for repo in $(cat dev/repos.list); do
     cd ..
 done
 
+tmpdir=`mktemp -d`
+
+exit_script() {
+    rm -r $tmpdir
+    kill $pid
+}
+
+trap exit_script EXIT
+
+echo 'ssh -o ControlPath='$tmpdir'/sock "$@"' > $tmpdir/sshcmd
+chmod +x $tmpdir/sshcmd
+export GIT_SSH="$tmpdir/sshcmd"
+
+ssh -o ControlPath=$tmpdir/sock -MN git@github.com & pid=$!
+
 for repo in $(cat dev/repos.list); do
     cd $repo
     if git remote show origin -n | grep -q "https://github.com/webgravel/$repo"; then
         git remote set-url origin $URL/$repo
     fi
-    time git pull && time git push || exit 1
+    git pull && git push || exit 1
     cd ..
 done

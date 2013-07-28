@@ -2,7 +2,7 @@
 
 cd "$(dirname $0)"
 
-if [ -e .begin ]; then
+if [ -e .began ]; then
     echo "Already began."
     exit 1
 fi
