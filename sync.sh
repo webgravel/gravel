@@ -4,7 +4,7 @@ cd "$(dirname $0)/.."
 URL=git@github.com:webgravel
 for repo in $(cat dev/repos.list); do
     cd $repo
-    if ! git status | grep -q 'nothing to commit, working directory clean'; then
+    if ! git status | grep -q 'nothing to commit..working directory clean'; then
         echo "Warning: $repo not clean"
     fi
     cd ..

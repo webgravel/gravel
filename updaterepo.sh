@@ -13,7 +13,7 @@ else
     for pkg in $packages; do
         (
             cd $(dirname $pkg)
-            if ! git status | grep -q 'nothing to commit, working directory clean'; then
+            if ! git status | grep -q 'nothing to commit..working directory clean'; then
                 echo "Warning: uncommited changes in $(basename $(dirname $pkg)) (use --dev to package them)"
             fi
         )
