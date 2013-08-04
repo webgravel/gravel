@@ -8,4 +8,6 @@ package
 storage
 userd
 userd-web
+ext-bouncy
+ext-nodejs
 dev
