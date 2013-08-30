@@ -11,4 +11,5 @@ userd-web
 ext-bouncy
 ext-nodejs
 userd-ssh
+api
 dev
